@@ -1,0 +1,20 @@
+!!!
+%html{ :xmlns => "http://www.w3.org/1999/xhtml", :lang => "en", 'xml:lang' => "en" }
+  %head
+    %title Be on the same list
+  %body
+    - unless @user
+      %a{:href => "/oauth/request_token"}
+        Twitter login
+    - else
+      %p
+        You are logged in as
+        %b
+          = @user.screen_name
+      %p
+        %a{:href => "/#{@user.screen_name}"}
+          Analyze #{@user.screen_name} !
+
+      %p
+        %a{:href => "/logout"}
+          Logout

@@ -1,0 +1,33 @@
+!!!
+%html{ :xmlns => "http://www.w3.org/1999/xhtml", :lang => "en", 'xml:lang' => "en" }
+  %head
+    %title Be on the same list
+  %body
+    %h1
+      Result of analyzing
+      %a{:href => "http://twitter.com/#{params[:name]}", :target => "_blank"}
+        = params[:name]
+    %table
+      %tr
+        %th User
+        %th List
+        %th Num
+        %th
+
+      - @list.each do |user, lists, count|
+        %tr
+          %td
+            %a{:href => "http://twitter.com/#{user.screen_name}", :target => "_blank"}
+              %img{:src => user.profile_image_url, :width => 48, :height => 48}
+              = user.screen_name
+          %td
+            - lists.each do |list|
+              %a{:href => "http://twitter.com#{list.uri}", :target => "_blank"}
+                = list.full_name
+              %br
+          %td
+            %span{:style => "font-size: #{count*2 + 10}px"}
+              = count
+          %td
+            %a{:href => "/#{user.screen_name}"}
+              Analyze #{user.screen_name} !
