@@ -14,7 +14,7 @@
         %th Num
         %th
 
-      - @list.each do |user, lists, count|
+      - @user.cal_users_lists_table.each do |user, lists, count|
         %tr
           %td
             %a{:href => "http://twitter.com/#{user.screen_name}", :target => "_blank"}
