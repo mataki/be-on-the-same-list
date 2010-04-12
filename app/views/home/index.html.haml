@@ -13,7 +13,7 @@
           = @user.screen_name
       %p
         %a{:href => "/#{@user.screen_name}"}
-          Analyze #{@user.screen_name} !
+          Analyze #{h @user.screen_name} !
 
       %p
         %a{:href => "/logout"}

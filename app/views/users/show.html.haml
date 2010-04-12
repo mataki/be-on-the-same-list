@@ -6,7 +6,7 @@
     %h1
       Result of analyzing
       %a{:href => "http://twitter.com/#{params[:name]}", :target => "_blank"}
-        = params[:name]
+        = h params[:name]
     %table
       %tr
         %th User
@@ -19,15 +19,15 @@
           %td
             %a{:href => "http://twitter.com/#{user.screen_name}", :target => "_blank"}
               %img{:src => user.profile_image_url, :width => 48, :height => 48}
-              = user.screen_name
+              = h user.screen_name
           %td
             - lists.each do |list|
               %a{:href => "http://twitter.com#{list.uri}", :target => "_blank"}
-                = list.full_name
+                = h list.full_name
               %br
           %td
             %span{:style => "font-size: #{count*2 + 10}px"}
-              = count
+              = h count
           %td
             %a{:href => "/#{user.screen_name}"}
-              Analyze #{user.screen_name} !
+              Analyze #{h user.screen_name} !
