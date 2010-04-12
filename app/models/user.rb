@@ -34,9 +34,10 @@ class User < ActiveRecord::Base
   end
 
   def self.find_or_create_by_response(user)
-    self.find_or_create_by_screen_name(user.screen_name) do |u|
-      u.profile_image_url = user.profile_image_url
-    end
+    u = self.find_or_initialize_by_screen_name(user.screen_name)
+    u.profile_image_url = user.profile_image_url
+    u.save
+    u
   end
 
   def cal_users_lists_table
