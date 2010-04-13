@@ -1,20 +1,28 @@
-!!!
-%html{ :xmlns => "http://www.w3.org/1999/xhtml", :lang => "en", 'xml:lang' => "en" }
-  %head
-    %title Be on the same list
-  %body
-    - unless @user
-      %a{:href => "/oauth/request_token"}
-        Twitter login
-    - else
-      %p
-        You are logged in as
-        %b
-          = @user.screen_name
-      %p
-        %a{:href => "/#{@user.screen_name}"}
-          Analyze #{h @user.screen_name} !
+.post
+  %h2.title
+    あなたと同じリストに入れられている人を探しましょう！
+  %p.meta
+    %span.date
+      &nbsp;
+    %span.posted
+      = "&nbsp;" * 40
+  .clear_both
+    &nbsp;
+  .entry
+    %p
+      このサイトでは、他のユーザから<strong>同じリストに入れられているユーザ</strong>を探すことができます。リストには作った人が、同じグループだと考えて登録します。なので、その人はあなたと同じ属性を持っている可能性がありあす。例えば、<strong>同じ職業</strong>かもしれませんし、<strong>同じ趣味</strong>を持っているかもしれません。
+    %p
+      ここでは同じリストに入れられている数が多い人からランキング表示します。このランキングは、<strong>あなた以外の人の作成したリスト</strong>によって作成されるのであなたの<strong>思ってもみなかった結果</strong>が表示されるかもしれません。
 
-      %p
-        %a{:href => "/logout"}
-          Logout
+  .entry
+    .center
+      - unless logged_in?
+        %p
+          さぁ、さっそくログインして探してみましょう！
+        %p
+          - link_to request_token_path do
+            = image_tag "Sign-in-with-Twitter-lighter.png"
+      - else
+        - link_to user_path(session[:screen_name]), :id => "find_self" do
+          #{session[:screen_name]}で探す！
+

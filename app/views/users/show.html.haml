@@ -1,17 +1,23 @@
-!!!
-%html{ :xmlns => "http://www.w3.org/1999/xhtml", :lang => "en", 'xml:lang' => "en" }
-  %head
-    %title Be on the same list
-  %body
-    %h1
-      Result of analyzing
-      %a{:href => "http://twitter.com/#{params[:name]}", :target => "_blank"}
-        = h params[:name]
-    %table
+.post
+  %h2.title
+    = link_to h(params[:name]), twitter_url(params[:name]), :target => "_blank"
+    と同じリストに入れられている人
+  %p.meta
+    %span.date
+      &nbsp;
+    %span.posted
+      = "&nbsp;" * 70
+  .clear_both
+    &nbsp;
+  .entry
+    .right
+      - link_to_update_status(@user)
+  .entry
+    %table.result
       %tr
-        %th User
-        %th List
-        %th Num
+        %th ユーザ
+        %th リスト
+        %th 数
         %th
 
       - @user.cal_users_lists_table.each do |user, lists, count|
@@ -28,6 +34,8 @@
           %td
             %span{:style => "font-size: #{count*2 + 10}px"}
               = h count
-          %td
-            %a{:href => "/#{user.screen_name}"}
-              Analyze #{h user.screen_name} !
+          %td.find_other
+            = link_to "#{h user.screen_name}を調べる！", user_path(user.screen_name), :class => "find_other"
+  .entry
+    .right
+      - link_to_update_status(@user)

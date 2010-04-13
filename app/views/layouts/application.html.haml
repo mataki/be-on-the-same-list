@@ -1,0 +1,80 @@
+!!! Strict
+/
+  Design by Free CSS Templates
+  http://www.freecsstemplates.org
+  Released for free under a Creative Commons Attribution 2.5 License
+
+  Name       : Indication
+  Description: A two-column, fixed-width design with dark color scheme.
+  Version    : 1.0
+  Released   : 20090910
+%html{ :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %meta{ :name => "keywords", :content => "" }
+    %meta{ :name => "description", :content => "" }
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "content-type" }
+    %title
+      Be on The Same List
+    = stylesheet_link_tag "application"
+  %body
+    #wrapper
+      #header
+        #logo
+          %h1
+            = link_to "Be on The Same List", root_url
+      #menu
+        %ul
+          %li{:class => current_page?(root_path) ? "current_page_item" : "" }
+            %a{ :href => "/" }
+              Home
+          - if logged_in?
+            %li{:class => current_page?(root_path) ? "" : "current_page_item" }
+              - link_to user_path(session[:screen_name]) do
+                = h session[:screen_name]
+          %li
+            = link_to "Contact @mat_aki", update_status_on_twitter_url('@mat_aki', :in_reply_to => "mat_aki")
+      #page
+        #page-bgtop
+          - if flash[:notice]
+            #flash
+              = h flash[:notice]
+          #page-bgbtm
+            #content
+              = yield
+            #sidebar
+              %ul
+                %li
+                  #login
+                    - if logged_in?
+                      #login-text
+                        あなたは
+                        = h session[:screen_name]
+                        でログイン中
+                        %br
+                        - link_to logout_path do
+                          ログアウト
+                    - else
+                      #login-text
+                        ログインして似たユーザを探す
+                        - link_to request_token_path do
+                          = image_tag "Sign-in-with-Twitter-lighter.png"
+                  .clear_both
+                - if @sidebar
+                  = yield :sidebar
+                %li
+                  %h2
+                    最近探されたユーザ
+                  %ul
+                    - User.all(:conditions => ["fetched_at > ?", 1.day.ago], :order => "fetched_at DESC", :limit => 5).each do |user|
+                      %li
+                        = link_to h(user.screen_name), user_path(user.screen_name)
+
+            .clear_both
+              &nbsp;
+    #footer
+      %p
+        Copyright (c) 2010 #{link_to "mat-aki", twitter_url("mat_aki")} All rights reserved. Design by
+        %a{ :href => "http://www.freecsstemplates.org/" }
+          Free CSS Templates
+= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"
+= javascript_include_tag "application"

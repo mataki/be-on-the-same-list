@@ -40,10 +40,15 @@ class User < ActiveRecord::Base
     u
   end
 
+  def no_1_user
+    cal_users_lists_table.first.try(:first)
+  end
+
   def cal_users_lists_table
+    return @result if @result
     list_user_arr = lists.inject([]) do |arr, list|
       arr + list.users.map{ |user| [user, list] }
     end.reject{ |i| i[0].screen_name == self.screen_name }
-    list_user_arr.group_by{ |ar| ar[0].screen_name }.map{ |k,v| [v.first[0], v.map{|i| i[1]}, v.size]}.sort{ |a,b| a[2] <=> b[2]}.reverse
+    @result = list_user_arr.group_by{ |ar| ar[0].screen_name }.map{ |k,v| [v.first[0], v.map{|i| i[1]}, v.size]}.sort{ |a,b| a[2] <=> b[2]}.reverse
   end
 end
