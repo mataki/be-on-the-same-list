@@ -11,4 +11,19 @@ module ApplicationHelper
     uri.query = query.to_query
     uri.to_s
   end
+
+  def google_analitics_tag
+    <<-EOF
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-15821811-1");
+pageTracker._setDomainName(".mat-aki.net");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+EOF
+  end
 end
