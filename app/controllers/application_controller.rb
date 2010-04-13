@@ -14,7 +14,10 @@ class ApplicationController < ActionController::Base
 
 private
   def set_session_screen_name
-    session[:screen_name] = user.screen_name if session[:atoken] and session[:screen_name].blank?
+    if session[:atoken] and session[:screen_name].blank?
+      user = client.verify_credentials
+      session[:screen_name] = user.screen_name
+    end
   end
 
   def redirect_shrink_url
