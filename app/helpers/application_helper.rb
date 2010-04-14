@@ -7,7 +7,7 @@ module ApplicationHelper
 
   def update_status_on_twitter_url(status, options = {})
     uri = URI.join("http://twitter.com/")
-    query = options.update(:status => status)
+    query = options.update(:status => "#{status} #samelist")
     uri.query = query.to_query
     uri.to_s
   end
