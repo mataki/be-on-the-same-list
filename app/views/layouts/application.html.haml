@@ -68,6 +68,17 @@
                     - User.all(:conditions => ["fetched_at > ?", 1.day.ago], :order => "fetched_at DESC", :limit => 5).each do |user|
                       %li
                         = link_to h(user.screen_name), user_path(user.screen_name)
+                %li
+                  <!-- Start of HootSuite Embed -->
+                  <object width="300" height="400" id="hootsuite_embed_18651">
+                  <param name="movie" value="http://static.hootsuite.com/hoot-embed.swf"></param>
+                  <param name="allowFullScreen" value="true"></param>
+                  <param name="allowscriptaccess" value="always"></param>
+                  <param name="bgcolor" value="#FFFFFF"></param>
+                  <param name="flashvars" value="primaryColor=A8CF64&amp;refreshRate=0&amp;query=%22%23samelist%22+OR+%22mat-aki%22+OR+%22%E5%90%8C%E3%81%98%E3%83%AA%E3%82%B9%E3%83%88%22&amp;title=%23samelist%7Cmat-aki%7C%E5%90%8C%E3%81%98%E3%83%AA%E3%82%B9%E3%83%88&amp;profanityFilter=0"></param>
+                  <embed src="http://static.hootsuite.com/hoot-embed.swf" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="300" height="400" bgcolor="#FFFFFF" flashvars="primaryColor=A8CF64&amp;refreshRate=0&amp;query=%22%23samelist%22+OR+%22mat-aki%22+OR+%22%E5%90%8C%E3%81%98%E3%83%AA%E3%82%B9%E3%83%88%22&amp;title=%23samelist%7Cmat-aki%7C%E5%90%8C%E3%81%98%E3%83%AA%E3%82%B9%E3%83%88&amp;profanityFilter=0"></embed>
+                  </object>
+                  <!-- End of HootSuite Embed -->
 
             .clear_both
               &nbsp;

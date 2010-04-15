@@ -21,6 +21,9 @@ h2 {
 h3 {
   font-size: 1.6em; }
 
+img {
+  border: 0; }
+
 p, ul, ol {
   margin-top: 0;
   line-height: 180%; }

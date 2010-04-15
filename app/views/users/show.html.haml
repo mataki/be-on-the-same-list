@@ -12,6 +12,16 @@
   .entry
     .right
       - link_to_update_status(@user)
+  - unless logged_in?
+    .entry
+      .center
+        %p
+          下のリンクをクリックして、あなたの同じリストに入れられている人を探してみましょう！<br />
+          意外な人が同じリストにいるかもしれません。
+        %p
+          - link_to request_token_path do
+            = image_tag "Sign-in-with-Twitter-lighter.png"
+
   .entry
     %table.result
       %tr
